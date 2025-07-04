@@ -1,5 +1,9 @@
 name: Check Markdown Code Blocks in PR/Issue Description
 
+permissions:
+  issues: write
+  pull-requests: write
+
 on:
   issues:
     types:
