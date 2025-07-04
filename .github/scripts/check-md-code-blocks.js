@@ -20,20 +20,20 @@ function isBotComment(comment, actor) {
 }
 
 function fixCodeBlocks(body) {
-  // Replace ```\n or ```\r\n with ```python\n
-  // Only if there's no language after ```
   const lines = body.split('\n');
   let insideCode = false;
   let fixed = false;
   for (let i = 0; i < lines.length; i++) {
-    const match = lines[i].match(/^```(\s*)$/);
-    if (match && !insideCode) {
+    // Opening code block without language
+    if (!insideCode && lines[i].trim() === '```') {
       lines[i] = '```python';
       fixed = true;
       insideCode = true;
-    } else if (lines[i].startsWith('```') && insideCode) {
+    } else if (insideCode && lines[i].trim() === '```') {
+      // Closing code block
       insideCode = false;
     }
+    // else leave the line as is
   }
   return { fixedBody: lines.join('\n'), fixed };
 }
