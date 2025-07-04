@@ -23,14 +23,22 @@ function fixCodeBlocks(body) {
   const lines = body.split('\n');
   let insideCode = false;
   let fixed = false;
+
   for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
     // Opening code block without language
-    if (!insideCode && lines[i].trim() === '```') {
+    if (!insideCode && line.trim() === '```') {
       lines[i] = '```python';
-      fixed = true;
       insideCode = true;
-    } else if (insideCode && lines[i].trim() === '```') {
-      // Closing code block
+      fixed = true;
+    }
+    // Opening code block with language (don't touch)
+    else if (!insideCode && line.trim().startsWith('```') && line.trim().length > 3) {
+      insideCode = true;
+    }
+    // Closing code block
+    else if (insideCode && line.trim() === '```') {
       insideCode = false;
     }
     // else leave the line as is
