@@ -19,6 +19,6 @@ jobs:
   fix-md-code-blocks:
     runs-on: ubuntu-latest
     steps:
-      - uses: mahenzon/md-code-block-auto-lang@v1
+      - uses: mahenzon/md-code-block-auto-lang@69c7e957648c737e798d6c6f484a1684f179b1c8
         with:
           language: python
