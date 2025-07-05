@@ -19,6 +19,11 @@ jobs:
   fix-md-code-blocks:
     runs-on: ubuntu-latest
     steps:
-      - uses: mahenzon/md-code-block-auto-lang@v1
+      - id: fixer
+        uses: mahenzon/md-code-block-auto-lang@v1
         with:
           language: python
+          silent: 'true'
+
+      - name: Show fix result count
+        run: echo "Fixed ${{ steps.fixer.outputs.fixes }} code blocks"
