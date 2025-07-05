@@ -1,4 +1,4 @@
-name: Check Markdown Code Blocks in PR/Issue Description
+name: Auto-fix Markdown code blocks
 
 permissions:
   issues: write
@@ -16,23 +16,9 @@ on:
       - synchronize
 
 jobs:
-  check-description:
+  fix-md-code-blocks:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: mahenzon/md-code-block-auto-lang@v1
         with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install @octokit/rest
-
-      - name: Check code blocks in description
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_EVENT_PATH: ${{ github.event_path }}
-        run: node .github/scripts/check-md-code-blocks.js
+          language: python
