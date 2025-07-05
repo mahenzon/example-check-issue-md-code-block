@@ -22,9 +22,6 @@ jobs:
       - id: fixer
         uses: mahenzon/md-code-block-auto-lang@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.REPO_ISSUE_AND_PR_PAT }}
           language: python
           silent: 'true'
-
-      - name: Show fix result count
-        run: echo "Fixed ${{ steps.fixer.outputs.fixes }} code blocks"
